@@ -6,7 +6,7 @@ Python reference implementation of GRS v0.3.0.
 Usage:
     from grs import ReceiptGenerator, ReceiptVerifier, ConstraintResult
 
-    generator = ReceiptGenerator(system_id="my-system", signing_key=b"secret")
+    generator = ReceiptGenerator(system_id="my-system", signing_key=os.environ.get("GRS_SIGNING_KEY", b"example-only-do-not-use"))
     receipt = generator.generate(
         inputs={"query": "..."},
         outputs={"response": "..."},
@@ -19,6 +19,7 @@ Usage:
 import hashlib
 import hmac
 import json
+import os
 import uuid
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
